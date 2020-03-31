@@ -1,31 +1,32 @@
 # MICCAI 2019 Prostate Cancer segmentation challenge
-### Work in progress! Updates to come.
-Attempt to process high resolution images in google collab.
-
+This repo was an attempt to process high resolution images in google collab.
 This project is about Deep Learning in microscopy 2D high-resolution(5Kx5k pixels) image segmentation.
 MICCAI 2019 Prostate Cancer segmentation challenge data were used.
-
 Data can be downloaded from here: https://gleason2019.grand-challenge.org/
 
-In order to reproduce the results of this challenge place the extracted data in a  google collab folder and use it as root path.
+## [Medical Zoo pytorch integration](https://github.com/black0017/MedicalZooPytorch "MedZoo")
+This project is now part of [Medical Zoo pytorch](https://github.com/black0017/MedicalZooPytorch "MedZoo") project. Visit this page for more details. 
 
-Data loaders are availiable
 
 
-## Usage
-### 1. Open miccai.ipynb in Google Colab
+
+### Old documentation
+
+#### Data loaders are availiable
+#### Usage
+#### 1. Open miccai.ipynb in Google Colab
 1. Go to https://colab.research.google.com
 2. **```File```** > **```Upload notebook...```** > **```GitHub```** > **```Paste this link:``` https://github.com/black0017/MICCAI-2019-Prostate-Cancer-segmentation-challenge/blob/master/MICCAI_2019.ipynb**
 3. Ensure that **```Runtime```** > **```Change runtime type```** is ```Python 3``` with ```GPU```
 ### 2. Initial imports, install, initializations
 Second step is to install all the required dependencies. Select the first and second code cells and push ```shift+enter```. You'll see running lines of executing code. Wait until it's done (1-2 minutes).
-### 3. Helper functions
+#### 3. Helper functions
 
-### 4. Read annotations and offline processing
+#### 4. Read annotations and offline processing
 Applies majority voting for the provided annotations to generate training labels
 Executed only once due to poor time complexity (rougly 2-3 minutes to generate 1 image label)
 
-### 5. Baseline experiment
+#### 5. Baseline experiment
 The baseline approach:
 1. Majority label Voting from different domain experts
 2. Random shuffling 80% train 20% val split
