@@ -5,12 +5,14 @@ MICCAI 2019 Prostate Cancer segmentation challenge data were used.
 Data can be downloaded from here: https://gleason2019.grand-challenge.org/
 
 ## [Medical Zoo pytorch integration](https://github.com/black0017/MedicalZooPytorch "MedZoo")
-This project is now part of [Medical Zoo pytorch](https://github.com/black0017/MedicalZooPytorch "MedZoo") project. Visit this page for more details. 
+
+
+### This project is now part of [Medical Zoo pytorch](https://github.com/black0017/MedicalZooPytorch "MedZoo") project. Visit this page for more details. 
 
 
 
 
-### Old documentation
+#### Old documentation
 
 #### Data loaders are availiable
 #### Usage
