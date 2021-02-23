@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.idea/
+.idea/*
+.Python
+build/
+MICCAI_2019_pathology_challenge
+MICCAI_2019_pathology_challenge/*
+labels
+train_samples
+sub_img_paths
+sub_img_paths_train
+sub_img_paths_val
+val_samples
+lightning_logs

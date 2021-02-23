@@ -1,62 +1,74 @@
 # MICCAI 2019 Prostate Cancer segmentation challenge
-This repo was an attempt to process high resolution images in google collab.
-This project is about Deep Learning in microscopy 2D high-resolution(5Kx5k pixels) image segmentation.
-MICCAI 2019 Prostate Cancer segmentation challenge data were used.
-Data can be downloaded from here: https://gleason2019.grand-challenge.org/
+This repo segments high-resolution images.
 
-## [Medical Zoo pytorch integration](https://github.com/black0017/MedicalZooPytorch "MedZoo")
+Google colab notebook is also [available](https://colab.research.google.com/drive/1biPE5drh_3TPMraykW2taJ7v7Gx3FuBx?usp=sharing).
+
+This project is about Deep Learning in microscopy images.
+
+The images are 2D but really high resolution ~5Kx5k pixels.
+
+There are multiple annotators that manually segment the images.
+Each annotator segments different number of images.
+
+We need to map the annotators to the image and perform the so-called majority voting to generate the labels.
+
+MICCAI 2019 Prostate Cancer segmentation [challenge data](https://gleason2019.grand-challenge.org/) were used.
+The data are relativly easy to download, but you need to make an account.
+
+### Installation step
+
+Clone the project, create a new virtual environment, and run:
+```
+pip install -r requirements.txt
+```
+
+### Data
+Download the data and place them in the project folder.
+I named the folder "MICCAI_2019_pathology_challenge"
 
 
-### This project is now part of [Medical Zoo pytorch](https://github.com/black0017/MedicalZooPytorch "MedZoo") project. Visit this page for more details. 
-
-
-
-
-#### Old documentation
-
-#### Data loaders are availiable
-#### Usage
-#### 1. Open miccai.ipynb in Google Colab
-1. Go to https://colab.research.google.com
-2. **```File```** > **```Upload notebook...```** > **```GitHub```** > **```Paste this link:``` https://github.com/black0017/MICCAI-2019-Prostate-Cancer-segmentation-challenge/blob/master/MICCAI_2019.ipynb**
-3. Ensure that **```Runtime```** > **```Change runtime type```** is ```Python 3``` with ```GPU```
-### 2. Initial imports, install, initializations
-Second step is to install all the required dependencies. Select the first and second code cells and push ```shift+enter```. You'll see running lines of executing code. Wait until it's done (1-2 minutes).
-#### 3. Helper functions
-
-#### 4. Read annotations and offline processing
+#### Read annotations and offline processing
 Applies majority voting for the provided annotations to generate training labels
-Executed only once due to poor time complexity (rougly 2-3 minutes to generate 1 image label)
+Executed only once due to poor time complexity: 
+roughly <1 minute to generate 1 image label
 
-#### 5. Baseline experiment
+Check the path name in the generate_labels.py script and run it:
+
+```
+python generate_labels.py
+```
+It takes ~ 2 hours, so take a break and enjoy your coffe ;) !
+
+#### 5. Baseline experiment 
+
+After checking the paths, run:
+```
+python train.py
+```
+
 The baseline approach:
 1. Majority label Voting from different domain experts
 2. Random shuffling 80% train 20% val split
-3. 512x512x3 input patches as used in the original paper of 2d-Unet
-4. Generate sample dataset rougly ~50 patches per input image
+3. 512x512x3 input patches
+4. Unet architecture
+4. Generate 30 samples per train image and 10 per val img
 5. Train with Unet without data augmentation
 6. Multi class dice loss functions will be used.
 
-Hyperparameter tuning will *not* be applied is it is considered out of the scope of this assignment in this stage.
 
-After the baseline expiriment further ideas/practices can be tested:
+After the baseline experiment further ideas/practices can be tested:
 
-1. Split the dataset based on slice number and *not* randomly!
-2. Apply Common data augmentation techniques
-3. Examine input downsampling option
+1. Split the dataset based on slice number and ID and not randomly!
+2. Apply common data augmentation techniques
+3. Examine input down-sampling option
 4. Use more recent model architectures and compare them to the baseline
-5. Multiscale feature extraction would be a cool idea since image dimension is high
 
-### 6. Current issues to encounter!!!
-Even though is is shown that 25GB of RAM are available I could not store more than one inputs patche per image in memory.
 
-I tried to save only the crop width and height but then then loader was really slow (4 sec to load,crop and preprocess the image  and 2,5 sec with 2 workers- which is still slow).
 
-So I wrote the code to store only one patch per train image and changed the training patches every 50 subepochs.(similar to https://arxiv.org/abs/1804.02967)
+## Medical Zoo Pytorch
+For medical imaging projects, visit  [Medical Zoo pytorch](https://github.com/black0017/MedicalZooPytorch "MedZoo") project. 
 
-The optimal solution as I see it now would be to store the preprocessed generated image patches in my drive and load at runtime!
 
-There was also a problem with annotations that took me some time to figure out. The annotations were different from each expert. I used as a reference the Maps1 folder, because it had the same size(244 labels as the number of images). However, the annotated images were not excacly the same as the train images. Then I used as a reference the Maps5 folder and excluded the extra annotations.
 
 ## Support 
 If you like this repo and find it useful, please consider (★) starring it, so that it can reach a broader audience.
